@@ -10,7 +10,7 @@ pipeline {
             spec:
               containers:
               - name: jnlp
-                image: sheayn/jnlp-agent-sample
+                image: sheayun/jnlp-agent-sample
                 env:
                 - name: DOCKER_HOST
                   value: "tcp://localhost:2375"
