@@ -22,7 +22,7 @@ pipeline {
                 - name: DOCKER_TLS_CERTDIR
                   value: ""
                 securityContext:
-                  privilleged: true
+                  privileged: true
             '''
         }
     }
@@ -37,7 +37,7 @@ pipeline {
                 script {
                     dockerImage = docker.build dockerImageName
                     docker.withRegistry('https://registry.hub.docker.com',
-                    'dockerhub-credentials') {
+                        'dockerhub-credentials') {
                         dockerImage.push("latest")
                     }
                 }
@@ -46,8 +46,8 @@ pipeline {
         stage('deploy application on kubernetes cluster') {
             steps {
                 withKubeConfig([credentialsId: 'KUBECONFIG',
-                serverUrl: 'https://kubernetes.default',
-                namespace: 'default']) {
+                    serverUrl: 'https://kubernetes.default',
+                    namespace: 'default']) {
                     sh '''
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
